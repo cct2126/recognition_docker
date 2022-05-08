@@ -1,0 +1,38 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: recognition
+  name: recognition
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: recognition
+  template:
+    metadata:
+      labels:
+        app: recognition
+    spec:
+      containers:
+      - image: cctsui/recognition-test:latest
+        #imagePullPolicy: Never
+        name: flask-test
+        ports:
+        - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: recognition
+  name: recognition
+spec:
+  ports:
+  - port: 5678
+    protocol: TCP
+    targetPort: 5678
+  selector:
+    app: recognition
+  type: ClusterIP
