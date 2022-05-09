@@ -18,7 +18,7 @@ spec:
       containers:
       - image: cctsui/recognition-test:latest
         #imagePullPolicy: Never
-        name: flask-test
+        name: recognition
         ports:
         - containerPort: 5000
 ---
