@@ -4,9 +4,14 @@ ssl._create_default_https_context = ssl._create_unverified_context
 import torch
 from PIL import Image
 from torchvision import transforms
+import torchvision.models as models
 
-model = torch.hub.load('pytorch_vision_v0.10.0/', 'resnet50', pretrained=True, source='local')
+# model = torch.hub.load('pytorch_vision_v0.10.0/', 'resnet50', pretrained=True, source='local')
+# model = torch.hub.load('pytorch_vision_v0.10.0/', 'resnet50', source='local', force_reload=True)
 
+model = models.resnet50()
+ckpt = torch.load('checkpoints/resnet50-0676ba61.pth')
+model.load_state_dict(ckpt)
 model.eval()
 
 def validate(input_image):
